@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Когда там Yii3?</title>
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/sakura.css">
+    <link rel="stylesheet" href="css/progressbar.css">
+    <link rel="stylesheet" href="css/yii3-progress.css">
+    <script>
+        async function getData() {
+            try {
+                let response = await fetch("http://localhost:8000/get-stats.php");
+                console.log(response);
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+
+                let data = await response.json();
+                
+                let packReleased = document.querySelector("#packages-released");
+                let totalPackages = document.querySelector("#total-packages");
+                let progress = document.querySelector("#progress");
+
+                let progressBar = document.querySelector(".progress");
+
+                packReleased.textContent = data.stablePackages;
+                totalPackages.textContent = data.totalPackages;
+                progress.textContent = data.progress + "%";
+
+                progressBar.style.width = `calc(${data.progress}% - 40px)`;
+                
+                console.log(data);
+            }
+            catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        getData();
+    </script>
+</head>
+<body>
+<section class="container page">
+    <h1>Когда там Yii 3?</h1>
+    <div class="half-life-yii">
+        <img src="img/half-life-yii3.png">
+    </div>
+    <h3>Коротко о главном</h3>
+    <div class="progress-summary">
+        <p>Релизнуто <b id="packages-released" class="packages-released">89</b> пакетов из <b id="total-packages" class="packages-released">122</b>, прогресс <b id="progress">72%</b></p>
+    </div>
+    <div class="progress-bar-wrapper">
+        <div class="progress-bar">
+            <span class="bar">
+                <span class="progress"></span>
+            </span>
+        </div>
+    </div>
+</section>
+<section class="main">
+    <div>
+        <hr>
+        <h3>Ты можешь</h3>
+        <ol>
+            <li><p><a href="https://telegra.ph/Kak-pomoch-s-relizom-Yii3-02-14" target="_blank">Запилить пакет для Yii 3<span style="font-size: 30px">🤝</span></a></p></li>
+            <li><p><a href="https://opencollective.com/yiisoft" target="_blank">Ускорить релиз деньгами <span style="font-size: 30px">💳</span></a></p></li>
+            <li><p><a href="https://www.yiiframework.com/status/3.0" target="_blank">Выбрать пакет по душе <span style="font-size: 30px">✅</span></a></p></li>
+            <li><p><a href="https://github.com/yiisoft/docs/blob/master/003-roadmap.md" target="_blank">Оценить планы <span style="font-size: 30px">🧱</span></a></p></li>
+            <li><p><a href="https://t.me/yii3ru" target="_blank">Задать вопрос <span style="font-size: 30px">💬</span></a></p></li>
+        </ol>
+    </div>
+</section>
+<section class="footer">
+    <hr class="divider">
+    <div class="footer-links-block">
+        <div class="source-code-link">
+            <p><a href="https://github.com/Nex-Otaku/yii3-progress">Исходный код на GitHub <span style="font-size: 30px">👀</span></a></p>
+        </div>
+        <div class="source-code-link">
+            <p>Обновлено: <span class="updated-date">18.04.2023</span></p>
+        </div>
+    </div>
+</section>
+</body>
+</html>
