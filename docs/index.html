@@ -11,7 +11,7 @@
     <script>
         async function getData() {
             try {
-                let response = await fetch("http://localhost:8000/get-stats.php");
+                let response = await fetch("api/index.php");
                 console.log(response);
 
                 if (!response.ok) {
