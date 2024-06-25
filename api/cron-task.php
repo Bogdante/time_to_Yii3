@@ -58,6 +58,12 @@
         
     }
     $docsPath = realpath(__DIR__ . '/../docs/data.js');
+
+    if($docsPath === false) {
+        $docsPath = __DIR__ . '/../docs/data.js';
+        touch($docsPath);
+    }
+    
     $jsContent = "window.yii3 = ".json_encode($response, JSON_PRETTY_PRINT).";";
     file_put_contents($docsPath, $jsContent);
 ?>
