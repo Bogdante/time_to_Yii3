@@ -1,4 +1,8 @@
 <?php
+    require_once __DIR__ . '/vendor/autoload.php';
+    
+    use NexOtaku\MinimalFilesystem\Filesystem;
+
     $url = "https://www.yiiframework.com/status/3.0";
     $html = file_get_contents($url);
 
@@ -57,13 +61,9 @@
         }
         
     }
-    $docsPath = realpath(__DIR__ . '/../docs/data.js');
 
-    if($docsPath === false) {
-        $docsPath = __DIR__ . '/../docs/data.js';
-        touch($docsPath);
-    }
-    
+    $fs = new Filesystem();
+    $filePath = __DIR__ . '/../docs/data.js';
     $jsContent = "window.yii3 = ".json_encode($response, JSON_PRETTY_PRINT).";";
-    file_put_contents($docsPath, $jsContent);
+    $fs->writeFile($filePath, $jsContent);
 ?>

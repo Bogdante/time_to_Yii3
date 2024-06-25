@@ -13,14 +13,6 @@
         document.addEventListener('DOMContentLoaded', async function() {
             async function getData() {
                 try {
-                    // let response = await fetch("api/index.php");
-                    // console.log(response);
-
-                    // if (!response.ok) {
-                    //     throw new Error('Failed to fetch data');
-                    // }
-
-                    // let data = await response.json();
                     let data = window.yii3; 
                     let packReleased = document.querySelector("#packages-released");
                     let totalPackages = document.querySelector("#total-packages");
